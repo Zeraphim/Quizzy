@@ -5,7 +5,10 @@ import MainLayout from "./layouts/MainLayout";
 
 // Components
 import Main from "./components/MainDashboard"
+import QuestionBanks from "./components/QuestionBanks";
+
 import ErrorPage from "./components/ErrorPage";
+
 
 function App() {
 
@@ -15,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Main />} />
-            {/* <Route path="blogs" element={<Blogs />} /> */}
+            <Route path="question_banks" element={<QuestionBanks />} />
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >
             <Route index element={<Admin />} />
