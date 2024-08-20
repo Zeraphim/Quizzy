@@ -1,0 +1,38 @@
+{
+  "Philo": [
+    {
+      "Question": "What is the meaning of life?",
+      "Type": "Enumeration",
+      "Answer": "42"
+    },
+    {
+      "Question": "Is truth relative?",
+      "Type": "True/False",
+      "Answer": "False"
+    }
+  ],
+  "CS": [
+    {
+      "Question": "What is the time complexity of binary search?",
+      "Type": "Enumeration",
+      "Answer": "0(log n)"
+    },
+    {
+      "Question": "Which of the following is a sorting algorithm?",
+      "Type": "Multiple Choice",
+      "Answer": "Quick Sort"
+    }
+  ],
+  "Database": [
+    {
+      "Question": "What is a primary key?",
+      "Type": "Enumeration",
+      "Answer": "A unique identifier for each row in a table"
+    },
+    {
+      "Question": "SQL stands for Structured Query Language.",
+      "Type": "True/False",
+      "Answer": "True"
+    }
+  ]
+}
