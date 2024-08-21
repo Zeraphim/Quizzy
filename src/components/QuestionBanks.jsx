@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import question_banks_data from "../data/quizzes_temp.json"
 
+import { Link } from "react-router-dom";
+
 function QuestionBanks() {
 
     const [chosenQuestionBank, setChosenQuestionBank] = useState("")
@@ -28,6 +30,8 @@ function QuestionBanks() {
                 </div>
                 
             </div>
+
+            {/* Questions List Container */}
             <div className="h-full w-[60vw] flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
                 
                 {chosenQuestionBank && question_banks_data[chosenQuestionBank].map((question, index) => (
@@ -51,10 +55,22 @@ function QuestionBanks() {
                 </div>
                 ))}
 
-
-
             </div>
-            <div className="h-full w-[20vw] bg-orange-300">3</div>
+
+            {/* Action Buttons Container */}
+            <div className="h-full w-[20vw] text-white font-bold text-xl flex flex-col items-center justify-start px-6 gap-6">
+                <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                    Add Questions
+                </div>
+                <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                    Study Now
+                </div>
+                <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                    <Link to="/" className="w-full h-full flex items-center justify-center">
+                        Back
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }
