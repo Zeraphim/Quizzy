@@ -7,10 +7,9 @@ import MainLayout from "./layouts/MainLayout";
 import Main from "./components/MainDashboard"
 import QuestionBanks from "./components/QuestionBanks";
 import AddQuestion from "./components/AddQuestion";
+import StudyQuestionBank from "./components/StudyQuestionBank";
 
 import ErrorPage from "./components/ErrorPage";
-
-
 
 function App() {
 
@@ -22,6 +21,7 @@ function App() {
             <Route index element={<Main />} />
             <Route path="question_banks" element={<QuestionBanks />} />
             <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion />} />
+            <Route path="question_banks/:questionBankName/study" element={<StudyQuestionBank />} />
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >
             <Route index element={<Admin />} />

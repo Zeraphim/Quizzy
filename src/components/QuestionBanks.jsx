@@ -72,7 +72,9 @@ function QuestionBanks() {
                     </Link>
                 </div>
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
-                    Study Now
+                    <Link to={`/question_banks/${chosenQuestionBank}/study`} className="w-full h-full flex items-center justify-center">
+                        Study Now
+                    </Link>
                 </div>
             </div>
         </div>
