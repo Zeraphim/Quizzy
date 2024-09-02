@@ -3,12 +3,19 @@ import { useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
-function AddQuestion() {
+import PropTypes from 'prop-types';
+
+function AddQuestion({QuestionBanksData}) {
+
+    let currentQuestionBankData = QuestionBanksData;
+
+    const [newQuestionBankData, setNewQuestionBankData] = useState({});
 
     const [textAreaContent, setTextAreaContent] = useState("");
 
     const { questionBankName } = useParams();
 
+    // TextArea Watcher
     useEffect(() => {
         console.log(textAreaContent)
     }, [textAreaContent])
@@ -16,6 +23,10 @@ function AddQuestion() {
     const handleTextAreaContentChange = (event) => {
         setTextAreaContent(event.target.value);
     };
+
+    const testButtonClicked = (event) => {
+        console.log(currentQuestionBankData);
+    }
 
     return (
         <div className="h-screen w-screen flex flex-row items-center justify-center gap-6 p-6">
@@ -33,6 +44,10 @@ function AddQuestion() {
                         </Link>
                     </div>
                     <input type="file" className="file-input file-input-bordered file-input-accent w-full h-20 max-w-xs" />
+
+                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => testButtonClicked()}>
+                        Test
+                    </div>
                 </div>
 
                 {/* Textarea Container */}
@@ -46,14 +61,58 @@ function AddQuestion() {
                     onChange={handleTextAreaContentChange}
                     ></textarea>
                 </div>
+
             </div>
 
             {/* Preview Container */}
-            <div className="h-full w-1/2 bg-blue-300">
+            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start bg-blue-300">
+
+                {/* Toggles Container */}
+                <div className="h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6 bg-green-300">
+
+                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                        <Link to="/" className="w-full h-full flex items-center justify-center">
+                            All
+                        </Link>
+                    </div>
+
+                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                        <Link to="/" className="w-full h-full flex items-center justify-center">
+                            Current
+                        </Link>
+                    </div>
+
+                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                        <Link to="/" className="w-full h-full flex items-center justify-center">
+                            Added
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Preview Container */}
+                <div className="h-[75%] w-full flex items-start justify-center">
+                    hehe
+                </div>
+
+
+                {/* Start Now Button Container */}
+                <div className="h-[10%] w-full flex flex-row items-center justify-end pr-3 gap-6 bg-orange-300">
+
+                    {/* Start Button */}
+                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                        <Link to="/" className="w-full h-full flex items-center justify-center">
+                            Start
+                        </Link>
+                    </div>
+                </div>
 
             </div>
         </div>
     );
+}
+
+AddQuestion.propTypes = {
+    QuestionBanksData: PropTypes.object.isRequired
 }
 
 export default AddQuestion;

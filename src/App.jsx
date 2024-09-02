@@ -11,7 +11,12 @@ import StudyQuestionBank from "./components/StudyQuestionBank";
 
 import ErrorPage from "./components/ErrorPage";
 
+// Data Import
+import question_banks_data from "./data/quizzes_temp.json"
+import { useState } from "react";
+
 function App() {
+  const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
 
   return (
     <>
@@ -19,8 +24,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Main />} />
-            <Route path="question_banks" element={<QuestionBanks />} />
-            <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion />} />
+            <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} />} />
+            <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} />} />
             <Route path="question_banks/:questionBankName/study" element={<StudyQuestionBank />} />
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >

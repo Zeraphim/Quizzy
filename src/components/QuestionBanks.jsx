@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import question_banks_data from "../data/quizzes_temp.json"
 
 import { Link } from "react-router-dom";
 
-function QuestionBanks() {
+import PropTypes from 'prop-types';
 
-    const firstQuestionBank = Object.keys(question_banks_data)[0];
+function QuestionBanks({QuestionBanksData}) {
+
+    const firstQuestionBank = Object.keys(QuestionBanksData)[0];
     const [chosenQuestionBank, setChosenQuestionBank] = useState(firstQuestionBank);
 
     useEffect(() => {
@@ -22,7 +23,7 @@ function QuestionBanks() {
                 {/* Question Banks List */}
                 <div className="h-[90%] max-h-[90%] w-full flex flex-col items-center justify-start gap-4">
 
-                    {Object.keys(question_banks_data).map((quesBankTitle) => (
+                    {Object.keys(QuestionBanksData).map((quesBankTitle) => (
                         <div key={quesBankTitle} className={`w-full h-[5vh]  ${chosenQuestionBank === quesBankTitle ? "bg-violet-900" : "bg-slate-900 hover:bg-slate-950"} border-slate-800 border-2 transition text-white font-semibold text-2xl  flex items-center justify-center`} onClick={() => setChosenQuestionBank(quesBankTitle)}>
                             {quesBankTitle}
                         </div>
@@ -35,7 +36,7 @@ function QuestionBanks() {
             {/* Questions List Container */}
             <div className="h-full w-[60vw] flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
                 
-                {chosenQuestionBank && question_banks_data[chosenQuestionBank].map((question, index) => (
+                {chosenQuestionBank && QuestionBanksData[chosenQuestionBank].map((question, index) => (
                 // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
                 //     {question.Question}
                 // </div>
@@ -79,6 +80,10 @@ function QuestionBanks() {
             </div>
         </div>
     )
+}
+
+QuestionBanks.propTypes = {
+    QuestionBanksData: PropTypes.object.isRequired
 }
 
 export default QuestionBanks

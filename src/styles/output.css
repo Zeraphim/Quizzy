@@ -1552,6 +1552,10 @@ details.collapse summary::-webkit-details-marker {
   flex-direction: column;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1649,6 +1653,11 @@ details.collapse summary::-webkit-details-marker {
 .bg-\[\#1D232A\] {
   --tw-bg-opacity: 1;
   background-color: rgb(29 35 42 / var(--tw-bg-opacity));
+}
+
+.bg-green-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-10 {
