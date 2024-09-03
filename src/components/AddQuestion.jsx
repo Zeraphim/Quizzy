@@ -19,8 +19,13 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
     // TextArea Watcher
     useEffect(() => {
         // Filter the data based on the current page
-        const filteredData = currentQuestionBanksData[questionBankName] || {};
-        setTextAreaContent(JSON.stringify(filteredData, null, 2));
+        const filteredData = currentQuestionBanksData[questionBankName] || [];
+        const formattedData = filteredData.map(item => 
+        // `"Question": "${item.Question}"\n"Type": "${item.Type}"\n"Answer": "${item.Answer}"\n`
+        // ).join('\n');
+        `Question: ${item.Question}\nType: ${item.Type}\nAnswer: ${item.Answer}\n`
+        ).join('\n');
+        setTextAreaContent(formattedData);
     }, [questionBankName, currentQuestionBanksData]);
 
     const handleTextAreaChange = (event) => {
@@ -29,15 +34,26 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
         // Update the QuestionBanksData with the new content
         try {
-        const updatedData = JSON.parse(updatedContent);
+        const updatedData = updatedContent.split('\n\n').map(item => {
+            const lines = item.split('\n');
+            const question = lines[0].split(': ')[1].replace(/"/g, '');
+            const type = lines[1].split(': ')[1].replace(/"/g, '');
+            const answer = lines[2].split(': ')[1].replace(/"/g, '');
+            return { Question: question, Type: type, Answer: answer };
+        });
         setQuestionBanksData((prevData) => ({
             ...prevData,
             [questionBankName]: updatedData,
         }));
         } catch (error) {
-        console.error('Invalid JSON:', error);
+            // console.error('Invalid format:', error);
+            console.log();
         }
     };
+
+    const testButtonClicked = (event) => {
+        console.log("Test Button Clicked");
+    }
 
     return (
         <div className="h-screen w-screen flex flex-row items-center justify-center gap-6 p-6">
