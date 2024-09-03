@@ -9,6 +9,41 @@
       "Question": "Is truth relative?",
       "Type": "True/False",
       "Answer": "False"
+    },
+    {
+      "Question": "A?",
+      "Type": "True/False",
+      "Answer": "B"
+    },
+    {
+      "Question": "C",
+      "Type": "True/False",
+      "Answer": "D"
+    },
+    {
+      "Question": "E",
+      "Type": "True/False",
+      "Answer": "F"
+    },
+    {
+      "Question": "G",
+      "Type": "True/False",
+      "Answer": "H"
+    },
+    {
+      "Question": "A?",
+      "Type": "True/False",
+      "Answer": "B"
+    },
+    {
+      "Question": "C",
+      "Type": "True/False",
+      "Answer": "D"
+    },
+    {
+      "Question": "E",
+      "Type": "True/False",
+      "Answer": "F"
     }
   ],
   "CS": [

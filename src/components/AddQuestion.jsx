@@ -68,35 +68,53 @@ function AddQuestion({QuestionBanksData}) {
             <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start bg-blue-300">
 
                 {/* Toggles Container */}
-                <div className="h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6 bg-green-300">
-
-                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
-                        <Link to="/" className="w-full h-full flex items-center justify-center">
-                            All
-                        </Link>
-                    </div>
-
-                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
-                        <Link to="/" className="w-full h-full flex items-center justify-center">
-                            Current
-                        </Link>
-                    </div>
-
-                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
-                        <Link to="/" className="w-full h-full flex items-center justify-center">
-                            Added
-                        </Link>
+                <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6 bg-green-300">
+                    <div className="dropdown dropdown-hover">
+                    <div tabIndex={0} role="button" className="btn m-1">Toggle</div>
+                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <li><a className="">All</a></li>
+                        <li><a className="">Current</a></li>
+                        <li><a className="">Added</a></li>
+                    </ul>
                     </div>
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-[75%] w-full flex items-start justify-center">
-                    hehe
+                <div className="h-max w-full flex items-start justify-center overflow-y-auto">
+
+                    {/* Questions List Container */}
+                    <div className="h-full max-h-full w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
+
+                        <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
+                            {QuestionBanksData[questionBankName].map((question, index) => (
+                            // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
+                            //     {question.Question}
+                            // </div>
+
+                            <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-base-200 border">
+                                <input type="checkbox" />
+                                <div className="collapse-title">
+                                    <div className="text-sm text-violet-400">
+                                        {question.Type}
+                                    </div>
+                                    <div className="text-xl font-medium">
+                                        {question.Question}
+                                    </div>
+
+                                </div>
+                                <div className="collapse-content">
+                                    <p>{question.Answer}</p>
+                                </div>
+                            </div>
+                            ))}
+                        </div>
+
+                    </div>
                 </div>
 
 
                 {/* Start Now Button Container */}
-                <div className="h-[10%] w-full flex flex-row items-center justify-end pr-3 gap-6 bg-orange-300">
+                <div className="h-[10%] max-h[10%] w-full flex flex-row items-center justify-end pr-3 gap-6 bg-orange-300">
 
                     {/* Start Button */}
                     <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">

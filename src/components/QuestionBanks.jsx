@@ -14,7 +14,7 @@ function QuestionBanks({QuestionBanksData}) {
     }, [chosenQuestionBank])
 
     return (
-        <div className="h-screen max-h-screen w-screen flex flex-row items-center justify-center p-9 gap-6">
+        <div className="h-screen max-h-full w-screen flex flex-row items-center justify-center p-9 gap-6">
             {/* Question Banks List Container */}
             <div className="h-full w-[20vw] py-8 px-6 gap-6 flex flex-col items-center justify-start bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white z-40">
 
@@ -34,29 +34,32 @@ function QuestionBanks({QuestionBanksData}) {
             </div>
 
             {/* Questions List Container */}
-            <div className="h-full w-[60vw] flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
-                
-                {chosenQuestionBank && QuestionBanksData[chosenQuestionBank].map((question, index) => (
-                // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
-                //     {question.Question}
-                // </div>
+            <div className="h-full max-h-full w-[60vw] flex items-center justify-center overflow-y-scroll">
 
-                <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-base-200 border">
-                    <input type="checkbox" />
-                    <div className="collapse-title">
-                        <div className="text-sm text-violet-400">
-                            {question.Type}
-                        </div>
-                        <div className="text-xl font-medium">
-                            {question.Question}
-                        </div>
+                <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
+                    {chosenQuestionBank && QuestionBanksData[chosenQuestionBank].map((question, index) => (
+                    // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
+                    //     {question.Question}
+                    // </div>
 
+                    <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-base-200 border">
+                        <input type="checkbox" />
+                        <div className="collapse-title">
+                            <div className="text-sm text-violet-400">
+                                {question.Type}
+                            </div>
+                            <div className="text-xl font-medium">
+                                {question.Question}
+                            </div>
+
+                        </div>
+                        <div className="collapse-content">
+                            <p>{question.Answer}</p>
+                        </div>
                     </div>
-                    <div className="collapse-content">
-                        <p>{question.Answer}</p>
-                    </div>
+                    ))}
                 </div>
-                ))}
+            
 
             </div>
 
