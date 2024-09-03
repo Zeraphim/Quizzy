@@ -11,28 +11,33 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
     const [newQuestionBankData, setNewQuestionBankData] = useState({});
 
-    const [textAreaContent, setTextAreaContent] = useState(JSON.stringify(QuestionBanksData, null, 2));
+    const [currentQuestionBanksData, setCurrentQuestionBanksData] = useState(QuestionBanksData);
+    const [textAreaContent, setTextAreaContent] = useState("");
     
     const { questionBankName } = useParams();
 
     // TextArea Watcher
     useEffect(() => {
-        console.log(textAreaContent);
+        // Filter the data based on the current page
+        const filteredData = currentQuestionBanksData[questionBankName] || {};
+        setTextAreaContent(JSON.stringify(filteredData, null, 2));
+    }, [questionBankName, currentQuestionBanksData]);
+
+    const handleTextAreaChange = (event) => {
+        const updatedContent = event.target.value;
+        setTextAreaContent(updatedContent);
+
+        // Update the QuestionBanksData with the new content
         try {
-            const updatedQuestionBanksData = JSON.parse(textAreaContent);
-            setQuestionBanksData(updatedQuestionBanksData)
+        const updatedData = JSON.parse(updatedContent);
+        setQuestionBanksData((prevData) => ({
+            ...prevData,
+            [questionBankName]: updatedData,
+        }));
         } catch (error) {
-            console.error("Invalid JSON string:", error);
+        console.error('Invalid JSON:', error);
         }
-    }, [textAreaContent, setQuestionBanksData]);
-
-    const handleTextAreaContentChange = (event) => {
-        setTextAreaContent(event.target.value);
     };
-
-    const testButtonClicked = (event) => {
-        console.log(currentQuestionBankData);
-    }
 
     return (
         <div className="h-screen w-screen flex flex-row items-center justify-center gap-6 p-6">
@@ -79,7 +84,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     placeholder="Question" 
                     required 
                     style={{ resize: 'none' }}
-                    onChange={handleTextAreaContentChange}
+                    onChange={handleTextAreaChange}
                     value={textAreaContent}
                     ></textarea>
                 </div>
