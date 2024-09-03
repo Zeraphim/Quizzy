@@ -80,10 +80,10 @@ function AddQuestion({QuestionBanksData}) {
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-max w-full flex items-start justify-center overflow-y-auto">
+                <div className="h-full w-full flex items-start justify-center overflow-y-auto">
 
                     {/* Questions List Container */}
-                    <div className="h-full max-h-full w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
+                    <div className="w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
 
                         <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
                             {QuestionBanksData[questionBankName].map((question, index) => (

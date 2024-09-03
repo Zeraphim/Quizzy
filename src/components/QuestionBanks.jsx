@@ -33,33 +33,38 @@ function QuestionBanks({QuestionBanksData}) {
                 
             </div>
 
-            {/* Questions List Container */}
-            <div className="h-full max-h-full w-[60vw] flex items-center justify-center overflow-y-scroll">
+            {/* Preview Container */}
+            <div className="h-full w-[60vw] flex items-start justify-center overflow-y-auto">
 
-                <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
-                    {chosenQuestionBank && QuestionBanksData[chosenQuestionBank].map((question, index) => (
-                    // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
-                    //     {question.Question}
-                    // </div>
+                {/* Questions List Container */}
+                <div className="w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
+                    <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
+                        {chosenQuestionBank && QuestionBanksData[chosenQuestionBank].map((question, index) => (
+                        // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
+                        //     {question.Question}
+                        // </div>
 
-                    <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-base-200 border">
-                        <input type="checkbox" />
-                        <div className="collapse-title">
-                            <div className="text-sm text-violet-400">
-                                {question.Type}
+                        <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-base-200 border">
+                            <input type="checkbox" />
+                            <div className="collapse-title">
+                                <div className="text-sm text-violet-400">
+                                    {question.Type}
+                                </div>
+                                <div className="text-xl font-medium">
+                                    {question.Question}
+                                </div>
+
                             </div>
-                            <div className="text-xl font-medium">
-                                {question.Question}
+                            <div className="collapse-content">
+                                <p>{question.Answer}</p>
                             </div>
-
                         </div>
-                        <div className="collapse-content">
-                            <p>{question.Answer}</p>
-                        </div>
+                        ))}
                     </div>
-                    ))}
-                </div>
             
+                </div>
+
+
 
             </div>
 
