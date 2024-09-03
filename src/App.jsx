@@ -15,6 +15,9 @@ import ErrorPage from "./components/ErrorPage";
 import question_banks_data from "./data/quizzes_temp.json"
 import { useState } from "react";
 
+// Toastify Stylings
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
 

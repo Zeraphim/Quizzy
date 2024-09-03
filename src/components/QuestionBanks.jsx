@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify";
 
 function QuestionBanks({QuestionBanksData}) {
 
@@ -13,12 +14,15 @@ function QuestionBanks({QuestionBanksData}) {
         console.log(chosenQuestionBank)
     }, [chosenQuestionBank])
 
+    const notify = () => toast("Wow so easy !");
+
     return (
         <div className="h-screen max-h-full w-screen flex flex-row items-center justify-center p-9 gap-6">
+
             {/* Question Banks List Container */}
             <div className="h-full w-[20vw] py-8 px-6 gap-6 flex flex-col items-center justify-start bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white z-40">
 
-                <h1 className="text-white font-bold text-3xl">Question Banks</h1>
+                <h1 className="text-white font-bold text-3xl" onClick={() => notify()}>Question Banks</h1>
 
                 {/* Question Banks List */}
                 <div className="h-[90%] max-h-[90%] w-full flex flex-col items-center justify-start gap-4">
@@ -37,8 +41,8 @@ function QuestionBanks({QuestionBanksData}) {
             <div className="h-full w-[60vw] flex items-start justify-center overflow-y-auto">
 
                 {/* Questions List Container */}
-                <div className="w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
-                    <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
+                <div className="w-[60vw] flex items-center justify-center p-3">
+                    <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
                         {chosenQuestionBank && QuestionBanksData[chosenQuestionBank].map((question, index) => (
                         // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
                         //     {question.Question}

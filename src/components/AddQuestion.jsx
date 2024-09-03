@@ -16,6 +16,38 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
     
     const { questionBankName } = useParams();
 
+    /*
+
+    Question Types Formatting:
+
+    1. True or False - True or False
+
+        Question: [The Question]
+        Type: Enumeration
+        Answer: [True/False]
+
+    2. Multiple Choice - Choices are given, choose the correct answer
+
+        Question: [The Question]
+        Type: Multiple Choice
+        Choices: [Choice A; Choice B; Choice C;] // separated by semicolon
+        Answer: [Choice A]
+
+    3. Identification - Enter the correct answer
+
+        Question: [The Question]
+        Type: Identification
+        Answer: [The Answer]
+
+    4. Sequence - Arrange a given sequence
+
+        Question: [The Question]
+        Type: Sequence
+        Sequence: [Choice A; Choice B; Choice C;] // separated by semicolon
+        Answer: [Choice A; Choice B; Choice C;] // separated by semicolon
+
+    */
+
     // TextArea Watcher
     useEffect(() => {
         // Filter the data based on the current page
@@ -113,7 +145,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 {/* Toggles Container */}
                 <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6 bg-green-300">
 
-                    <div className="dropdown dropdown-hover">
+                    <div className="dropdown dropdown-hover z-40">
                         <div tabIndex={0} role="button" className="btn m-1">Toggle</div>
                         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                             <li><a className="">All</a></li>
@@ -125,12 +157,12 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto">
+                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30">
 
                     {/* Questions List Container */}
-                    <div className="w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
+                    <div className="w-[60vw] flex items-center justify-center p-3">
 
-                        <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl overflow-y-scroll">
+                        <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
                             {QuestionBanksData[questionBankName].map((question, index) => (
                             // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
                             //     {question.Question}
