@@ -160,7 +160,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start">
 
                 {/* Back and Upload Button Container */}
-                <div className="flex-[15%] h-[15%] w-full flex flex-row items-center justify-start gap-6">
+                <div className="flex-[15%] h-[15%] w-full flex flex-row items-center justify-start gap-6 animate-fade-down-1s transition">
                     <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
                         <Link to="/" className="w-full h-full flex items-center justify-center">
                             Back
@@ -197,7 +197,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 </div>
 
                 {/* AI Input Box Container */}
-                <div className="flex-[10%] h-[10%] w-full flex flex-row items-center justify-center">
+                <div className="flex-[10%] h-[10%] w-full flex flex-row items-center justify-center animate-fade-down-1s transition">
 
                     {/* Message Input Container */}
                     <div className="h-full w-full flex flex-row items-center justify-center gap-3">
@@ -223,7 +223,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 </div>
 
                 {/* Textarea Container */}
-                <div className="flex-[75%] h-[75%] w-full flex items-center justify-center">
+                <div className="flex-[75%] h-[75%] w-full flex items-center justify-center animate-fade-up-1s transition">
                     <textarea 
                     className="textarea textarea-lg w-full h-full textarea-bordered text-[15px] bg-[#1D232A]" 
                     name="message" 
@@ -238,7 +238,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             </div>
 
             {/* Preview Container */}
-            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start border-l border-slate-600">
+            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start border-l border-slate-600 animate-fade-left-1s transition">
 
                 {/* Preview Text and Status Text Container */}
                 <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6">
@@ -307,7 +307,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     </div>
 
                     {/* Start Button */}
-                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-teal-500 transition">
                         <Link to="/" className="w-full h-full flex items-center justify-center">
                             Start
                         </Link>

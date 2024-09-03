@@ -20,7 +20,7 @@ function QuestionBanks({QuestionBanksData}) {
         <div className="h-screen max-h-full w-screen flex flex-row items-center justify-center p-9 gap-6">
 
             {/* Question Banks List Container */}
-            <div className="h-full w-[20vw] py-8 px-6 gap-6 flex flex-col items-center justify-start bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white z-40">
+            <div className="h-full w-[20vw] py-8 px-6 gap-6 flex flex-col items-center justify-start bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white z-40 animate-fade-right-1s transition">
 
                 <h1 className="text-white font-bold text-3xl" onClick={() => notify()}>Question Banks</h1>
 
@@ -38,7 +38,7 @@ function QuestionBanks({QuestionBanksData}) {
             </div>
 
             {/* Preview Container */}
-            <div className="h-full w-[60vw] flex items-start justify-center overflow-y-auto">
+            <div className="h-full w-[60vw] flex items-start justify-center overflow-y-auto animate-fade-up-1s transition">
 
                 {/* Questions List Container */}
                 <div className="w-[60vw] flex items-center justify-center p-3">
@@ -73,7 +73,7 @@ function QuestionBanks({QuestionBanksData}) {
             </div>
 
             {/* Action Buttons Container */}
-            <div className="h-full w-[20vw] text-white font-bold text-xl flex flex-col items-center justify-center px-6 gap-6">
+            <div className="h-full w-[20vw] text-white font-bold text-xl flex flex-col items-center justify-center px-6 gap-6 animate-fade-left-1s transition">
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
                     <Link to="/" className="w-full h-full flex items-center justify-center">
                         Back
