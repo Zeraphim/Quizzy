@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Main />} />
             <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} />} />
-            <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} />} />
+            <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData}/>} />
             <Route path="question_banks/:questionBankName/study" element={<StudyQuestionBank />} />
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >

@@ -5,20 +5,26 @@ import { Link } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 
-function AddQuestion({QuestionBanksData}) {
+function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
     let currentQuestionBankData = QuestionBanksData;
 
     const [newQuestionBankData, setNewQuestionBankData] = useState({});
 
-    const [textAreaContent, setTextAreaContent] = useState("");
-
+    const [textAreaContent, setTextAreaContent] = useState(JSON.stringify(QuestionBanksData, null, 2));
+    
     const { questionBankName } = useParams();
 
     // TextArea Watcher
     useEffect(() => {
-        console.log(textAreaContent)
-    }, [textAreaContent])
+        console.log(textAreaContent);
+        try {
+            const updatedQuestionBanksData = JSON.parse(textAreaContent);
+            setQuestionBanksData(updatedQuestionBanksData)
+        } catch (error) {
+            console.error("Invalid JSON string:", error);
+        }
+    }, [textAreaContent, setQuestionBanksData]);
 
     const handleTextAreaContentChange = (event) => {
         setTextAreaContent(event.target.value);
@@ -43,7 +49,22 @@ function AddQuestion({QuestionBanksData}) {
                             Back
                         </Link>
                     </div>
+
+                    {/* File Upload */}
                     <input type="file" className="file-input file-input-bordered file-input-accent w-full h-20 max-w-xs" />
+
+                    <div className="dropdown dropdown-hover">
+                        <div tabIndex={0} role="button" className="btn m-1">Bank</div>
+                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                            {Object.keys(QuestionBanksData).map((quesBankTitle) => (
+                                <li key={quesBankTitle}>
+                                    <Link to={`/question_banks/${quesBankTitle}/add_question`} className="w-full h-full">
+                                        <a className={``}>{quesBankTitle}</a>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
                     <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => testButtonClicked()}>
                         Test
@@ -59,6 +80,7 @@ function AddQuestion({QuestionBanksData}) {
                     required 
                     style={{ resize: 'none' }}
                     onChange={handleTextAreaContentChange}
+                    value={textAreaContent}
                     ></textarea>
                 </div>
 
@@ -69,18 +91,20 @@ function AddQuestion({QuestionBanksData}) {
 
                 {/* Toggles Container */}
                 <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6 bg-green-300">
+
                     <div className="dropdown dropdown-hover">
-                    <div tabIndex={0} role="button" className="btn m-1">Toggle</div>
-                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                        <li><a className="">All</a></li>
-                        <li><a className="">Current</a></li>
-                        <li><a className="">Added</a></li>
-                    </ul>
+                        <div tabIndex={0} role="button" className="btn m-1">Toggle</div>
+                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                            <li><a className="">All</a></li>
+                            <li><a className="">Current</a></li>
+                            <li><a className="">Added</a></li>
+                        </ul>
                     </div>
+
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-full w-full flex items-start justify-center overflow-y-auto">
+                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto">
 
                     {/* Questions List Container */}
                     <div className="w-[60vw] flex items-center justify-center overflow-y-scroll p-3">
@@ -130,7 +154,8 @@ function AddQuestion({QuestionBanksData}) {
 }
 
 AddQuestion.propTypes = {
-    QuestionBanksData: PropTypes.object.isRequired
+    QuestionBanksData: PropTypes.object.isRequired,
+    setQuestionBanksData: PropTypes.func.isRequired
 }
 
 export default AddQuestion;
