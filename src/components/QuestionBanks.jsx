@@ -73,7 +73,7 @@ function QuestionBanks({QuestionBanksData}) {
             </div>
 
             {/* Action Buttons Container */}
-            <div className="h-full w-[20vw] text-white font-bold text-xl flex flex-col items-center justify-start px-6 gap-6">
+            <div className="h-full w-[20vw] text-white font-bold text-xl flex flex-col items-center justify-center px-6 gap-6">
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
                     <Link to="/" className="w-full h-full flex items-center justify-center">
                         Back

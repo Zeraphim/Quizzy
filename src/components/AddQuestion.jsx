@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify";
+
+import _ from 'lodash';
 
 function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
@@ -12,12 +15,18 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
     const [newQuestionBankData, setNewQuestionBankData] = useState({});
 
     const [currentQuestionBanksData, setCurrentQuestionBanksData] = useState(QuestionBanksData);
+    const [tempQuestionBanksData, setTempQuestionBanksData] = useState(JSON.parse(JSON.stringify(QuestionBanksData)));
+
     const [textAreaContent, setTextAreaContent] = useState("");
     
     const { questionBankName } = useParams();
 
-    /*
+    const [isChangeMade, setIsChangeMade] = useState(false);
 
+    const [statusText, setStatusText] = useState("No changes made, make sure to Save 😉")
+
+    /*
+                                             
     Question Types Formatting:
 
     1. True or False - True or False
@@ -47,18 +56,26 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
         Answer: [Choice A; Choice B; Choice C;] // separated by semicolon
 
     */
-
     // TextArea Watcher
     useEffect(() => {
         // Filter the data based on the current page
-        const filteredData = currentQuestionBanksData[questionBankName] || [];
+        const filteredData = tempQuestionBanksData[questionBankName] || [];
         const formattedData = filteredData.map(item => 
         // `"Question": "${item.Question}"\n"Type": "${item.Type}"\n"Answer": "${item.Answer}"\n`
         // ).join('\n');
         `Question: ${item.Question}\nType: ${item.Type}\nAnswer: ${item.Answer}\n`
         ).join('\n');
         setTextAreaContent(formattedData);
-    }, [questionBankName, currentQuestionBanksData]);
+
+        if (_.isEqual(tempQuestionBanksData, currentQuestionBankData)) {
+            setIsChangeMade(false);
+            setStatusText("No changes made 😉");
+        } else {
+            setIsChangeMade(true);
+            setStatusText("Changes made, don't forget to Save ✅");
+        }
+
+    }, [questionBankName, tempQuestionBanksData, currentQuestionBankData]);
 
     const handleTextAreaChange = (event) => {
         const updatedContent = event.target.value;
@@ -73,7 +90,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             const answer = lines[2].split(': ')[1].replace(/"/g, '');
             return { Question: question, Type: type, Answer: answer };
         });
-        setQuestionBanksData((prevData) => ({
+        setTempQuestionBanksData((prevData) => ({
             ...prevData,
             [questionBankName]: updatedData,
         }));
@@ -87,6 +104,53 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
         console.log("Test Button Clicked");
     }
 
+    // Save Button Function - Saves the changes made, alerts the user if there's an error in formatting
+    const saveButtonClicked = (event) => {
+        console.log("Save Button Clicked");
+
+        try {
+            setQuestionBanksData(tempQuestionBanksData);
+            toast.success("Changes Saved !!!");
+        } catch (error) {
+            console.log("HEHE")
+        }
+    }
+
+    const [messageInput, setMessageInput] = useState("");
+
+    async function sendPM(event) {
+        console.log("ask ai");
+        // event.preventDefault();
+        // const pmInfo = {
+        // receiver_id: Number(selectedReceiverId),
+        // receiver_class: "User",
+        // body: messageInput,
+        // };
+
+        // try {
+        // const response = await axios.post(`${API_URL}/messages`, pmInfo, {
+        //     headers,
+        // });
+        // const { data } = response;
+        // if (data.data) {
+        //     const newMessage = {
+        //     body: messageInput,
+        //     receiver: receivers.find((r) => r.id === Number(selectedReceiverId)),
+        //     sender_id: user.id,
+        //     };
+        //     setSentMessages([...sentMessages, newMessage]);
+        //     setMessageInput("");
+        //     resetMessages();
+        // } else {
+        //     alert("Cannot send message.");
+        // }
+        // } catch (error) {
+        // console.log(error);
+        // }
+    }
+
+
+
     return (
         <div className="h-screen w-screen flex flex-row items-center justify-center gap-6 p-6">
             {/* <h1 className="text-3xl font-bold" onClick={() => console.log(questionBankName)}>Add Question to {questionBankName}</h1> */}
@@ -96,18 +160,18 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start">
 
                 {/* Back and Upload Button Container */}
-                <div className="h-[15%] w-full flex flex-row items-center justify-start gap-6">
+                <div className="flex-[15%] h-[15%] w-full flex flex-row items-center justify-start gap-6">
                     <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
                         <Link to="/" className="w-full h-full flex items-center justify-center">
                             Back
                         </Link>
                     </div>
 
-                    {/* File Upload */}
-                    <input type="file" className="file-input file-input-bordered file-input-accent w-full h-20 max-w-xs" />
-
-                    <div className="dropdown dropdown-hover">
-                        <div tabIndex={0} role="button" className="btn m-1">Bank</div>
+                    {/* Bank Button Dropdown */}
+                    <div className="dropdown dropdown-hover h-20 w-1/4">
+                        <div tabIndex={0} role="button" className="btn h-full w-full text-white font-bold text-xl bg-slate-800 hover:bg-violet-800 transition">
+                            Bank
+                        </div>
                         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                             {Object.keys(QuestionBanksData).map((quesBankTitle) => (
                                 <li key={quesBankTitle}>
@@ -119,13 +183,47 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                         </ul>
                     </div>
 
-                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => testButtonClicked()}>
+                    {/* Ask AI Button */}
+                    {/* <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-teal-500 transition">
+                        Ask AI
+                    </div> */}
+
+                    {/* File Upload */}
+                    <input type="file" className="file-input file-input-bordered file-input-accent w-full h-20 max-w-xs" />
+
+                    {/* <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => testButtonClicked()}>
                         Test
+                    </div> */}
+                </div>
+
+                {/* AI Input Box Container */}
+                <div className="flex-[10%] h-[10%] w-full flex flex-row items-center justify-center">
+
+                    {/* Message Input Container */}
+                    <div className="h-full w-full flex flex-row items-center justify-center gap-3">
+                    <h1>Ask AI</h1>
+                    <form onSubmit={sendPM} className="w-5/6">
+
+                        <div className="flex flex-row w-auto rounded-full bg-slate-200 dark:bg-slate-800 shadow-md border-1 border-black">
+                            <input
+                            className="flex-[80%] p-2 px-4 bg-slate-200 dark:bg-slate-800 rounded-l-full text-[1rem] font-normal border-none"
+                            type="text"
+                            value={messageInput}
+                            onChange={(event) => {
+                                setMessageInput(event.target.value);
+                            }}
+                            />
+                            <button className="flex-[10%] rounded-r-full bg-slate-700 hover:bg-teal-500 transition">Send</button>
+                        </div>
+
+                        
+                    </form>
                     </div>
+
                 </div>
 
                 {/* Textarea Container */}
-                <div className="h-[85%] w-full flex items-center justify-center">
+                <div className="flex-[75%] h-[75%] w-full flex items-center justify-center">
                     <textarea 
                     className="textarea textarea-lg w-full h-full textarea-bordered text-[15px] bg-[#1D232A]" 
                     name="message" 
@@ -140,30 +238,40 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             </div>
 
             {/* Preview Container */}
-            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start bg-blue-300">
+            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start border-l border-slate-600">
 
-                {/* Toggles Container */}
-                <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6 bg-green-300">
+                {/* Preview Text and Status Text Container */}
+                <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6">
 
-                    <div className="dropdown dropdown-hover z-40">
+                    {/* Preview Container */}
+                    <div className="flex-[50%]">
+                        <h1 className="text-4xl">Preview ({questionBankName})</h1>
+                    </div>
+
+                    {/* Status Container */}
+                    <div className={`flex-[50%] text-[0.9rem] flex items-center justify-end ${isChangeMade ? "text-red-300" : "text-green-300"}`}>
+                        {statusText}
+                    </div>
+
+                    {/* <div className="dropdown dropdown-hover z-40">
                         <div tabIndex={0} role="button" className="btn m-1">Toggle</div>
                         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                             <li><a className="">All</a></li>
                             <li><a className="">Current</a></li>
                             <li><a className="">Added</a></li>
                         </ul>
-                    </div>
+                    </div> */}
 
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30">
+                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30 border-y border-slate-600">
 
                     {/* Questions List Container */}
                     <div className="w-[60vw] flex items-center justify-center p-3">
 
                         <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
-                            {QuestionBanksData[questionBankName].map((question, index) => (
+                            {tempQuestionBanksData[questionBankName].map((question, index) => (
                             // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
                             //     {question.Question}
                             // </div>
@@ -191,10 +299,15 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
 
                 {/* Start Now Button Container */}
-                <div className="h-[10%] max-h[10%] w-full flex flex-row items-center justify-end pr-3 gap-6 bg-orange-300">
+                <div className="h-[10%] max-h[10%] w-full flex flex-row items-center justify-end pr-3 gap-6">
+
+                    {/* Save Button */}
+                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => saveButtonClicked()}>
+                        Save
+                    </div>
 
                     {/* Start Button */}
-                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
                         <Link to="/" className="w-full h-full flex items-center justify-center">
                             Start
                         </Link>
