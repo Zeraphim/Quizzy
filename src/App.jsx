@@ -13,14 +13,21 @@ import ErrorPage from "./components/ErrorPage";
 
 // Data Import
 import question_banks_data from "./data/quizzes_temp.json"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Toastify Stylings
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
+  const [firstQuestionBank, setFirstQuestionBank] = useState(Object.keys(questionBanksData)[0])
 
+  // Updates the firstQuestionBank state whenever questionBanksData state is changed
+  useEffect(() => {
+    setFirstQuestionBank(Object.keys(questionBanksData)[0]);
+  }, [questionBanksData])
+
+  const [answeredQuestionBanks, setAnsweredQuestionBanks] = useState({});
 
   const [darkMode, setDarkMode] = useState(false);
 
@@ -40,10 +47,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}>
-            <Route index element={<Main />} />
-            <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} />} />
+            <Route index element={<Main firstQuestionBank={firstQuestionBank}/>} />
+            <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank}/>} />
             <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData}/>} />
-            <Route path="question_banks/:questionBankName/study" element={<StudyQuestionBank />} />
+            <Route path="question_banks/study" element={<StudyQuestionBank QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} answeredQuestionBanks={answeredQuestionBanks} setAnsweredQuestionBanks={setAnsweredQuestionBanks} />} />
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >
             <Route index element={<Admin />} />

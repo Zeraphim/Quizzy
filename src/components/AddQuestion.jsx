@@ -306,10 +306,10 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                         Save
                     </div>
 
-                    {/* Start Button */}
+                    {/* Study Now Button */}
                     <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
-                        <Link to="/" className="w-full h-full flex items-center justify-center">
-                            Start
+                        <Link to={`/question_banks/study`} className="w-full h-full flex items-center justify-center">
+                            Study Now
                         </Link>
                     </div>
                 </div>
