@@ -21,11 +21,25 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
 
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    if (!darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    // console.log(darkMode)
+  };
+
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<MainLayout toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}>
             <Route index element={<Main />} />
             <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} />} />
             <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData}/>} />

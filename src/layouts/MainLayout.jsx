@@ -3,9 +3,11 @@ import { ToastContainer } from "react-toastify"
 
 import user_placeholder from "../assets/Default-User.webp"
 
-function MainLayout() {
+import PropTypes from 'prop-types';
+
+function MainLayout({toggleDarkMode, darkMode}) {
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-slate-900">
+    <div className="h-screen w-screen flex items-center justify-center bg-slate-200 dark:bg-slate-900 text-black dark:text-white">
 
           {/* Profile and Theme Controller Container */}
 
@@ -27,7 +29,7 @@ function MainLayout() {
                     <path
                       d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
                   </svg>
-                <input type="checkbox" value="synthwave" className="toggle theme-controller" />
+                <input type="checkbox" value="synthwave" className="toggle theme-controller" onClick={toggleDarkMode} checked={darkMode}/>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -44,8 +46,8 @@ function MainLayout() {
 
             {/* Avatar */}
             <div className="avatar flex flex-row items-center justify-center gap-5">
-              <div className="mask mask-squircle w-10">
-                <img src={user_placeholder} />
+              <div className="mask mask-squircle w-10 hover:scale-105">
+                <img src={user_placeholder} className="shadow-2xl"/>
               </div>
 
               <h1>Sign In</h1>
@@ -71,5 +73,10 @@ function MainLayout() {
     </div>
   )
 }
+
+MainLayout.propTypes = {
+  toggleDarkMode: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool.isRequired,
+};
 
 export default MainLayout
