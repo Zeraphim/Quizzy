@@ -54,7 +54,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
     const handleStartClick = () => {
         setIsAnswering(true);
 
-        let setQuestions = QuestionBanksData[chosenQuestionBank];
+        let setQuestions = JSON.parse(JSON.stringify(QuestionBanksData[chosenQuestionBank]));
 
         setQuestionsToAnswer(setQuestions);
     };
@@ -158,8 +158,8 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                                 <label className="swap swap-flip text-2xl card w-[50%] h-full">
                                     <input type="checkbox" className="h-[65vh] w-[27vw]" onClick={() => setCardClicked(true)} checked={cardClicked} />
 
-                                    <div className="swap-on p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[40%] border-slate-900 dark:border-white text-wrap">
-                                        <div>{currentQuestionType}</div>
+                                    <div className="swap-off p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[40%] border-slate-900 dark:border-white text-wrap">
+                                        <div className="text-[1rem] font-bold text-violet-500">{currentQuestionType}</div>
                                         <div>{currentQuestion}</div>
                                     </div>
 
