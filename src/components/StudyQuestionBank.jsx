@@ -46,15 +46,43 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
 
     }, [QuestionBanksData, answeredQuestionBanks, chosenQuestionBank]);
 
+    const [questionsToAnswer, setQuestionsToAnswer] = useState({});
+    const [currentQuestion, setCurrentQuestion] = useState("");
+    const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState("");
+
     const handleStartClick = () => {
-        setIsAnswering(true)
-    }
+        setIsAnswering(true);
+
+        let setQuestions = QuestionBanksData[chosenQuestionBank];
+
+        setQuestionsToAnswer(setQuestions);
+    };
+
+    useEffect(() => {
+        if (Object.keys(questionsToAnswer).length > 0) {
+            const firstKey = Object.keys(questionsToAnswer)[0];
+            setCurrentQuestion(questionsToAnswer[firstKey].Question);
+            setCurrentQuestionAnswer(questionsToAnswer[firstKey].Answer);
+        }
+    }, [questionsToAnswer]);
 
     const handleHardClick = () => {
         setTotalAnswered(totalAnswered + 1);
         setIncorrectAnswers(incorrectAnswers + 1);
 
         setCardClicked(false);
+
+        const firstKey = Object.keys(questionsToAnswer)[0];
+        delete questionsToAnswer[firstKey];
+
+        const remainingQuestions = Object.values(questionsToAnswer);
+        if (remainingQuestions.length > 0) {
+            setCurrentQuestion(remainingQuestions[0].Question);
+            setCurrentQuestionAnswer(remainingQuestions[0].Answer);
+        } else {
+            setCurrentQuestion(null);
+            setCurrentQuestionAnswer(null);
+        }
     };
 
     const handleBasicClick = () => {
@@ -62,6 +90,18 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
         setCorrectAnswers(correctAnswers + 1);
 
         setCardClicked(false);
+
+        const firstKey = Object.keys(questionsToAnswer)[0];
+        delete questionsToAnswer[firstKey];
+
+        const remainingQuestions = Object.values(questionsToAnswer);
+        if (remainingQuestions.length > 0) {
+            setCurrentQuestion(remainingQuestions[0].Question);
+            setCurrentQuestionAnswer(remainingQuestions[0].Answer);
+        } else {
+            setCurrentQuestion(null);
+            setCurrentQuestionAnswer(null);
+        }
     };
 
 
@@ -76,7 +116,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
 
             {/* Question Banks List Container */}
             {!isAnswering && (
-                <div className="h-full w-[20vw] py-8 px-6 gap-6 flex flex-col items-center justify-start bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-right-1s transition shadow-md">
+                <div className="h-full w-[20vw] py-8 px-6 gap-6 flex flex-col items-center justify-start bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-right-1s transition shadow-md select-none">
 
                     <h1 className="text-black dark:text-white font-bold text-3xl" onClick={() => console.log()}>Study Now</h1>
 
@@ -112,12 +152,12 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                                 <label className="swap swap-flip text-2xl card w-[50%] h-full">
                                     <input type="checkbox" className="h-[65vh] w-[27vw]" onClick={() => setCardClicked(true)} checked={cardClicked} />
 
-                                    <div className="swap-on p-10 flex flex-col items-center justify-start h-full min-w-max w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
-                                        HAH
+                                    <div className="swap-on p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white text-wrap">
+                                        {currentQuestionAnswer}
                                     </div>
 
-                                    <div className="swap-off p-10 flex flex-col items-center justify-start h-full min-w-max w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
-                                        HEH
+                                    <div className="swap-off p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white text-wrap">
+                                        {currentQuestion}
                                     </div>
                                 </label>
                             ) : (

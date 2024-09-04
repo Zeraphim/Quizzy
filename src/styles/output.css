@@ -3030,6 +3030,10 @@ details.collapse summary::-webkit-details-marker {
   overflow-y: auto;
 }
 
+.text-wrap {
+  text-wrap: wrap;
+}
+
 .rounded-3xl {
   border-radius: 1.5rem;
 }
