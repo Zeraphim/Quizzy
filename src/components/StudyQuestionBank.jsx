@@ -46,6 +46,10 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
 
     }, [QuestionBanksData, answeredQuestionBanks, chosenQuestionBank]);
 
+    const handleStartClick = () => {
+        setIsAnswering(true)
+    }
+
     const handleHardClick = () => {
         setTotalAnswered(totalAnswered + 1);
         setIncorrectAnswers(incorrectAnswers + 1);
@@ -95,25 +99,25 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
             {isAnswering && (
                 <div className="h-screen max-h-screen w-[60vw] flex flex-col items-center justify-center animate-fade-up-1s transition bg-slate-200 dark:bg-slate-900 z-50">
 
-                    <div className="w-full h-[10vh] flex items-center justify-center text-3xl font-bold">
+                    <div className="w-full h-[5vh] flex items-center justify-center text-3xl font-bold">
                         {chosenQuestionBank}
                     </div>
 
                     {/* Card container */}
-                    <div className="w-full h-[75vh] flex items-center justify-center">
+                    <div className="w-full h-[75vh] max-h-screen flex items-center justify-center">
                         <div className="stack w-full h-auto">
 
                             {/* Flippable Card */}
                             {chosenBankNumberOfItems - totalAnswered !== 0 ? (
-                                <label className="swap swap-flip text-9xl card w-[50%] h-full">
+                                <label className="swap swap-flip text-2xl card w-[50%] h-full">
                                     <input type="checkbox" className="h-[65vh] w-[27vw]" onClick={() => setCardClicked(true)} checked={cardClicked} />
 
-                                    <div className="swap-on p-3 flex flex-col items-center justify-start h-full min-w-max w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
-                                        😈
+                                    <div className="swap-on p-10 flex flex-col items-center justify-start h-full min-w-max w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
+                                        HAH
                                     </div>
 
-                                    <div className="swap-off p-3 flex flex-col items-center justify-start h-full min-w-max w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
-                                        😇
+                                    <div className="swap-off p-10 flex flex-col items-center justify-start h-full min-w-max w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
+                                        HEH
                                     </div>
                                 </label>
                             ) : (
@@ -192,18 +196,18 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                                     Number of Items: <b className="font-normal">{chosenBankNumberOfItems}</b>
                                 </div>
 
-                                <div>
+                                {/* <div>
                                     Answered Items: <b className="font-normal">{chosenBankNumberOfAnsweredItems}</b>
                                 </div>
 
                                 <div>
                                     Remaining Items: <b className="font-normal">{chosenBankNumberOfItemsLeft}</b>
-                                </div>
+                                </div> */}
 
 
                             </div>
 
-                            <div className="w-1/2 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-teal-500 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" onClick={() => setIsAnswering(true)}>
+                            <div className="w-1/2 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-teal-500 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" onClick={handleStartClick}>
                                 Start Now
                             </div>
 
