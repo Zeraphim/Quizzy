@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify
 import os
 import replicate
 
+from flask_cors import CORS
+
 '''
 This API created using Flask is hosted on AWS EC2 instance
 
@@ -19,6 +21,7 @@ os.environ["REPLICATE_API_TOKEN"] = "MY_API_KEY"
 api = replicate.Client(api_token=os.environ["REPLICATE_API_TOKEN"])
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/hello', methods=['GET'])
 def hello():

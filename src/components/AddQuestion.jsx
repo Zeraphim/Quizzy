@@ -128,34 +128,32 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
         // console.log("Input Value:", inputValue);
 
-        const replicate = new Replicate({
-            auth: import.meta.env.VITE_REPLICATE_API_TOKEN,
-        });
+        // try {
+        //     const response = await fetch(`http://18.140.54.190:5000/hello?input=${encodeURIComponent(inputValue)}`);
+        //     if (!response.ok) {
+        //         throw new Error('Network response was not ok');
+        //     }
+        //     const data = await response.json();
+        //     console.log('Response Data:', data);
+        // } catch (error) {
+        //     console.error('Error:', error);
+        // }
 
         try {
-            const response = await fetch('https://api.replicate.com/v1/models/meta/llama-2-70b-chat/predictions', {
-                method: 'POST',
+            const response = await fetch("http://18.140.54.190:5000/hello", {
+                method: "GET",
                 headers: {
-                    'Authorization': `Bearer ${import.meta.env.VITE_REPLICATE_API_TOKEN}`,
-                    'Content-Type': 'application/json'
+                Accept: "text/plain",
                 },
-                body: JSON.stringify({
-                    input: {
-                        prompt: inputValue
-                    }
-                })
-            });
+         });
+            const textResponse = await response.text();
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            console.log('Response Data:', data);
-            // Handle the response data as needed
-        } catch (error) {
-            console.error('Error:', error);
+            console.log(textResponse);
+            } catch (err) {
+            console.error(err);
         }
+
+        
 
         // const input = {
         // top_k: 50,
