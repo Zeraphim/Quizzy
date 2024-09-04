@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import "./styles/output.css"
+
 // Templates
 import MainLayout from "./layouts/MainLayout";
 
@@ -38,7 +40,7 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    // console.log(darkMode)
+    console.log(darkMode)
   };
 
 
