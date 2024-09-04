@@ -18,8 +18,9 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
     const [incorrectAnswers, setIncorrectAnswers] = useState(0);
     const [totalAnswered, setTotalAnswered] = useState(0);
 
+    // Card States
+    const [cardClicked, setCardClicked] = useState(false);
 
-    
     useEffect(() => {
 
         // Count the number of items in the chosen question bank
@@ -44,6 +45,21 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
         }
 
     }, [QuestionBanksData, answeredQuestionBanks, chosenQuestionBank]);
+
+    const handleHardClick = () => {
+        setTotalAnswered(totalAnswered + 1);
+        setIncorrectAnswers(incorrectAnswers + 1);
+
+        setCardClicked(false);
+    };
+
+    const handleBasicClick = () => {
+        setTotalAnswered(totalAnswered + 1);
+        setCorrectAnswers(correctAnswers + 1);
+
+        setCardClicked(false);
+    };
+
 
     return (
         <div className="h-screen max-h-full w-screen flex flex-row items-center justify-center p-9 gap-6">
@@ -84,26 +100,29 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                     </div>
 
                     {/* Card container */}
-                    <div className="w-full h-[75vh] flex items-center justify-center bg-orange-300">
+                    <div className="w-full h-[75vh] flex items-center justify-center">
                         <div className="stack w-full h-auto">
-                            {/* <div className="border-base-content card bg-base-100 h-[65vh] w-36 border text-center">
-                                <div className="card-body">A</div>
-                            </div> */}
 
                             {/* Flippable Card */}
-                            <label className="swap swap-flip text-9xl card w-[50%] h-full">
-                                <input type="checkbox" className="h-[65vh] w-[27vw]"/>
+                            {chosenBankNumberOfItems - totalAnswered !== 0 ? (
+                                <label className="swap swap-flip text-9xl card w-[50%] h-full">
+                                    <input type="checkbox" className="h-[65vh] w-[27vw]" onClick={() => setCardClicked(true)} checked={cardClicked} />
 
-                                <div className="swap-on p-3 flex flex-col items-center justify-start h-full min-w-max w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
-                                    😈
-                                </div>
+                                    <div className="swap-on p-3 flex flex-col items-center justify-start h-full min-w-max w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
+                                        😈
+                                    </div>
 
-                                <div className="swap-off p-3 flex flex-col items-center justify-start h-full min-w-max w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
-                                    😇
+                                    <div className="swap-off p-3 flex flex-col items-center justify-start h-full min-w-max w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
+                                        😇
+                                    </div>
+                                </label>
+                            ) : (
+                                <div className="congratulations-message w-full h-full flex items-center justify-center text-2xl font-bold">
+                                    Congratulations! You have answered all the questions. 🥳
                                 </div>
-                            </label>
+                            )}
                             
-                            {Array.from({ length: chosenBankNumberOfItems - 1 }).map((_, index) => (
+                            {Array.from({ length: chosenBankNumberOfItems - (totalAnswered + 1) }).map((_, index) => (
                                 <div key={index} className="card h-[65vh] w-2/4 text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
                                     <div className="card-body"></div>
                                 </div>
@@ -111,8 +130,23 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                         </div>
                     </div>
 
-                    {/* Actions */}
-                    <div className="w-full h-[15vh] bg-blue-300">
+                    <div className="w-full h-[15vh] flex items-center justify-center gap-6 text-black dark:text-white font-bold text-xl">
+
+                        {/* Actions */}
+                        {cardClicked && (
+
+                            <div className="w-full h-[15vh] flex items-center justify-center gap-6 text-black dark:text-white font-bold text-xl">
+
+                                <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-red-600 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white hover:scale-105" onClick={handleHardClick}>
+                                    😓 Hard
+                                </div>
+
+                                <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-teal-500 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white hover:scale-105" onClick={handleBasicClick}>
+                                    👌 Basic
+                                </div>
+
+                            </div>
+                        )}
 
                     </div>
 
