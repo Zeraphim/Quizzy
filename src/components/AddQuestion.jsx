@@ -120,84 +120,38 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
     const [messageInput, setMessageInput] = useState("");
 
-    async function sendPM(event) {
+    async function askAI(event) {
         event.preventDefault();
 
         const inputField = event.target.elements.askInput;
         const inputValue = inputField.value;
 
-        // console.log("Input Value:", inputValue);
-
-        // try {
-        //     const response = await fetch(`http://18.140.54.190:5000/hello?input=${encodeURIComponent(inputValue)}`);
-        //     if (!response.ok) {
-        //         throw new Error('Network response was not ok');
-        //     }
-        //     const data = await response.json();
-        //     console.log('Response Data:', data);
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // }
-
         try {
-            const response = await fetch("http://18.140.54.190:5000/hello", {
+            const response = await fetch(`http://18.140.54.190:5000/ask?input${encodeURIComponent(inputValue)}`, {
                 method: "GET",
                 headers: {
                 Accept: "text/plain",
                 },
          });
+
+            const jsonResponse = await response.json();
+            if (jsonResponse.error) {
+                throw new Error(jsonResponse.error);
+            }
+
             const textResponse = await response.text();
 
             console.log(textResponse);
+
+            setTextAreaContent(prevContent => prevContent + textResponse);
+
+
             } catch (err) {
             console.error(err);
+
+            toast.error("Error: " + err.message);
         }
 
-        
-
-        // const input = {
-        // top_k: 50,
-        // top_p: 0.9,
-        // prompt: "Work through this problem step by step:\n\nQ: Sarah has 7 llamas. Her friend gives her 3 more trucks of llamas. Each truck has 5 llamas. How many llamas does Sarah have in total?",
-        // max_tokens: 512,
-        // min_tokens: 0,
-        // temperature: 0.6,
-        // prompt_template: "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful assistant<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
-        // presence_penalty: 1.15,
-        // frequency_penalty: 0.2
-        // };
-
-        // for await (const event of replicate.stream("meta/meta-llama-3-70b-instruct", { input })) {
-        //     console.log(event.toString());
-        // }
-
-        // event.preventDefault();
-        // const pmInfo = {
-        // receiver_id: Number(selectedReceiverId),
-        // receiver_class: "User",
-        // body: messageInput,
-        // };
-
-        // try {
-        // const response = await axios.post(`${API_URL}/messages`, pmInfo, {
-        //     headers,
-        // });
-        // const { data } = response;
-        // if (data.data) {
-        //     const newMessage = {
-        //     body: messageInput,
-        //     receiver: receivers.find((r) => r.id === Number(selectedReceiverId)),
-        //     sender_id: user.id,
-        //     };
-        //     setSentMessages([...sentMessages, newMessage]);
-        //     setMessageInput("");
-        //     resetMessages();
-        // } else {
-        //     alert("Cannot send message.");
-        // }
-        // } catch (error) {
-        // console.log(error);
-        // }
     }
 
 
@@ -253,7 +207,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     {/* Message Input Container */}
                     <div className="h-full w-full flex flex-row items-center justify-center gap-3">
                     <h1>Ask AI</h1>
-                    <form onSubmit={sendPM} className="w-5/6">
+                    <form onSubmit={askAI} className="w-5/6">
 
                         <div className="flex flex-row w-auto rounded-full bg-slate-200 dark:bg-slate-800 shadow-md border-1 border-slate-900 dark:border-white border-opacity-[15%] dark:border-opacity-[4%]">
                             <input

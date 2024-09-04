@@ -16,7 +16,9 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
     // Session Stats
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [currentTotalAnswered, setCurrentTotalAnswered] = useState(0);
     const [totalAnswered, setTotalAnswered] = useState(0);
+    const [questionBanksAnswered, setQuestionBanksAnswered] = useState(0);
 
     // Card States
     const [cardClicked, setCardClicked] = useState(false);
@@ -69,8 +71,9 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
     }, [questionsToAnswer]);
 
     const handleHardClick = () => {
-        setTotalAnswered(totalAnswered + 1);
-        setIncorrectAnswers(incorrectAnswers + 1);
+        setTotalAnswered(prevTotal => prevTotal + 1);
+        setIncorrectAnswers(prevTotal => prevTotal + 1);
+        setCurrentTotalAnswered(prevTotal => prevTotal + 1);
 
         setCardClicked(false);
 
@@ -90,8 +93,9 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
     };
 
     const handleBasicClick = () => {
-        setTotalAnswered(totalAnswered + 1);
-        setCorrectAnswers(correctAnswers + 1);
+        setTotalAnswered(prevTotal => prevTotal + 1);
+        setCorrectAnswers(prevTotal => prevTotal + 1);
+        setCurrentTotalAnswered(prevTotal => prevTotal + 1);
 
         setCardClicked(false);
 
@@ -109,6 +113,13 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
             setCurrentQuestionType(null);
         }
     };
+
+    const handleContinueClick = () => {
+        setCurrentTotalAnswered(0);
+        setIsAnswering(false);
+
+        setQuestionBanksAnswered(prevTotal => prevTotal + 1);
+    }
 
 
     return (
@@ -143,7 +154,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
 
             {/* Post Cards Container */}
             {isAnswering && (
-                <div className="h-screen max-h-screen w-[60vw] flex flex-col items-center justify-center animate-fade-up-1s transition bg-slate-200 dark:bg-slate-900 z-50">
+                <div className="h-screen max-h-screen w-[60vw] flex flex-col items-center justify-center animate-fade-right-1s transition bg-slate-200 dark:bg-slate-900 z-50">
 
                     <div className="w-full h-[5vh] flex items-center justify-center text-3xl font-bold">
                         {chosenQuestionBank}
@@ -154,28 +165,34 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                         <div className="stack w-full h-auto">
 
                             {/* Flippable Card */}
-                            {chosenBankNumberOfItems - totalAnswered !== 0 ? (
+                            {chosenBankNumberOfItems - currentTotalAnswered !== 0 ? (
                                 <label className="swap swap-flip text-2xl card w-[50%] h-full">
                                     <input type="checkbox" className="h-[65vh] w-[27vw]" onClick={() => setCardClicked(true)} checked={cardClicked} />
 
-                                    <div className="swap-off p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[40%] border-slate-900 dark:border-white text-wrap">
+                                    <div className="swap-off p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-slate-800 rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[40%] border-slate-900 dark:border-white text-wrap">
                                         <div className="text-[1rem] font-bold text-violet-500">{currentQuestionType}</div>
                                         <div>{currentQuestion}</div>
                                     </div>
 
-                                    <div className="swap-on p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[40%] border-slate-900 dark:border-white text-wrap">
+                                    <div className="swap-on p-10 flex flex-col items-center justify-start h-full w-[27vw] max-w-[27vw] text-center bg-slate-300 dark:bg-slate-800 rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[40%] border-slate-900 dark:border-white text-wrap">
                                         <div className="text-[1rem] font-bold text-violet-500">Answer</div>
                                         <div>{currentQuestionAnswer}</div>
                                     </div>
                                 </label>
                             ) : (
-                                <div className="congratulations-message w-full h-full flex items-center justify-center text-2xl font-bold">
-                                    Congratulations! You have answered all the questions. 🥳
+                                <div className="congratulations-message w-full h-full flex flex-col items-center justify-center gap-20 text-2xl font-bold">
+                                    <div>
+                                        Congratulations! You have answered all the questions. 🥳
+                                    </div>
+
+                                    <div className="w-1/2 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-teal-500 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" onClick={handleContinueClick}>
+                                        Continue 👍
+                                    </div>
                                 </div>
                             )}
                             
-                            {Array.from({ length: chosenBankNumberOfItems - (totalAnswered + 1) }).map((_, index) => (
-                                <div key={index} className="card h-[65vh] w-2/4 text-center bg-slate-300 dark:bg-white rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
+                            {Array.from({ length: chosenBankNumberOfItems - (currentTotalAnswered + 1) }).map((_, index) => (
+                                <div key={index} className="card h-[65vh] w-2/4 text-center bg-slate-300 dark:bg-slate-800 rounded-3xl overflow-hidden border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
                                     <div className="card-body"></div>
                                 </div>
                             ))}
@@ -187,7 +204,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                         {/* Actions */}
                         {cardClicked && (
 
-                            <div className="w-full h-[15vh] flex items-center justify-center gap-6 text-black dark:text-white font-bold text-xl">
+                            <div className="w-full h-[15vh] flex items-center justify-center gap-6 text-black dark:text-white font-bold text-xl select-none">
 
                                 <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-red-600 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white hover:scale-105" onClick={handleHardClick}>
                                     😓 Hard
@@ -273,13 +290,17 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
             <div className="h-full w-[25vw] text-black dark:text-white font-bold text-xl flex flex-col items-center justify-center px-6 gap-6 animate-fade-left-1s transition">
 
 
-                <div className="w-full h-auto rounded-lg flex flex-col gap-4 items-center justify-center bg-opacity-30 g-slate-300 transition dark:bg-white hover:scale-105 p-3 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white">
+                <div className="w-full h-auto rounded-lg flex flex-col gap-4 items-center justify-center bg-opacity-30 g-slate-300 transition dark:bg-white hover:scale-105 p-3 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white select-none">
 
                     <div className="text-2xl">
                         Session Stats 📊
                     </div>
                     
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col text-[1rem] items-center justify-center">
+
+                        <div>
+                            Current Items: {chosenBankNumberOfItems}
+                        </div>
 
                         <div>
                             Correct Answers: {correctAnswers}
@@ -291,6 +312,10 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
 
                         <div>
                             Total Answered: {totalAnswered}
+                        </div>
+
+                        <div>
+                            Question Banks: {questionBanksAnswered}
                         </div>
 
                     </div>
