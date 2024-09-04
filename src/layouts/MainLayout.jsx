@@ -11,7 +11,7 @@ function MainLayout({toggleDarkMode, darkMode}) {
 
           {/* Profile and Theme Controller Container */}
 
-          <div className="absolute top-8 right-8 flex flex-row items-center justify-center gap-7 animate-fade-down-2s">
+          <div className="absolute top-7 right-8 flex flex-row items-center justify-center gap-7 animate-fade-down-2s">
 
             {/* Theme Controller */}
             <label className="flex cursor-pointer gap-2">

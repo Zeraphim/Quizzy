@@ -157,11 +157,11 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             {/* Add your form or content here */}
 
             {/* Input Container */}
-            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start">
+            <div className="h-full w-1/2 text-black dark:text-white font-bold text-xl flex flex-col items-center justify-start">
 
                 {/* Back and Upload Button Container */}
                 <div className="flex-[15%] h-[15%] w-full flex flex-row items-center justify-start gap-6 animate-fade-down-1s transition">
-                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition">
+                    <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
                         <Link to="/" className="w-full h-full flex items-center justify-center">
                             Back
                         </Link>
@@ -169,13 +169,13 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
                     {/* Bank Button Dropdown */}
                     <div className="dropdown dropdown-hover h-20 w-1/4">
-                        <div tabIndex={0} role="button" className="btn h-full w-full text-white font-bold text-xl bg-slate-800 hover:bg-violet-800 transition">
+                        <div tabIndex={0} role="button" className="btn h-full w-full text-black dark:text-white font-bold text-xl bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
                             Bank
                         </div>
-                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <ul tabIndex={0} className="dropdown-content menu text-black dark:text-white bg-slate-300 dark:bg-slate-800 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white rounded-box z-[1] w-52 p-2 shadow">
                             {Object.keys(QuestionBanksData).map((quesBankTitle) => (
                                 <li key={quesBankTitle}>
-                                    <Link to={`/question_banks/${quesBankTitle}/add_question`} className="w-full h-full">
+                                    <Link to={`/question_banks/${quesBankTitle}/add_question`} className="w-full h-full dark-hover:bg-slate-400">
                                         <a className={``}>{quesBankTitle}</a>
                                     </Link>
                                 </li>
@@ -189,7 +189,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     </div> */}
 
                     {/* File Upload */}
-                    <input type="file" className="file-input file-input-bordered file-input-accent w-full h-20 max-w-xs" />
+                    <input type="file" className="file-input file-input-accent w-full h-20 max-w-xs  text-black dark:text-white font-bold text-xl bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" />
 
                     {/* <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => testButtonClicked()}>
                         Test
@@ -197,23 +197,23 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 </div>
 
                 {/* AI Input Box Container */}
-                <div className="flex-[10%] h-[10%] w-full flex flex-row items-center justify-center animate-fade-down-1s transition">
+                <div className="flex-[10%] h-[10%] w-full flex flex-row items-center justify-center border-slate-900 animate-fade-down-1s transition">
 
                     {/* Message Input Container */}
                     <div className="h-full w-full flex flex-row items-center justify-center gap-3">
                     <h1>Ask AI</h1>
                     <form onSubmit={sendPM} className="w-5/6">
 
-                        <div className="flex flex-row w-auto rounded-full bg-slate-200 dark:bg-slate-800 shadow-md border-1 border-black">
+                        <div className="flex flex-row w-auto rounded-full bg-slate-200 dark:bg-slate-800 shadow-md border-1 border-slate-900 dark:border-white border-opacity-[15%] dark:border-opacity-[4%]">
                             <input
-                            className="flex-[80%] p-2 px-4 bg-slate-200 dark:bg-slate-800 rounded-l-full text-[1rem] font-normal border-none"
+                            className="flex-[80%] p-2 px-4 bg-slate-300 dark:bg-slate-800 bg-opacity-30 rounded-l-full text-[1rem] font-normal border-none focus:outline-none focus-border-none"
                             type="text"
                             value={messageInput}
                             onChange={(event) => {
                                 setMessageInput(event.target.value);
                             }}
                             />
-                            <button className="flex-[10%] rounded-r-full bg-slate-700 hover:bg-teal-500 transition">Send</button>
+                            <button className="flex-[10%] rounded-r-full bg-slate-300 dark:bg-slate-700 hover:bg-teal-500 transition text-black dark:text-white hover:text-white">Send</button>
                         </div>
 
                         
@@ -225,7 +225,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 {/* Textarea Container */}
                 <div className="flex-[75%] h-[75%] w-full flex items-center justify-center animate-fade-up-1s transition">
                     <textarea 
-                    className="textarea textarea-lg w-full h-full textarea-bordered text-[15px] bg-[#1D232A]" 
+                    className="textarea textarea-lg w-full h-full textarea-bordered text-[15px] bg-slate-300 dark:bg-slate-800 border-slate-900 bg-opacity-25 dark:border-white border-opacity-[15%] dark:border-opacity-[4%]" 
                     name="message" 
                     placeholder="Question" 
                     required 
@@ -238,7 +238,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
             </div>
 
             {/* Preview Container */}
-            <div className="h-full w-1/2 text-white font-bold text-xl flex flex-col items-center justify-start border-l border-slate-600 animate-fade-left-1s transition">
+            <div className="h-full w-1/2 text-black dark:text-white font-bold text-xl flex flex-col items-center justify-start border-l border-slate-300 dark:border-slate-600 animate-fade-left-1s transition">
 
                 {/* Preview Text and Status Text Container */}
                 <div className="h-[15%] max-h-[15%] w-full flex flex-row items-center justify-start p-3 gap-6">
@@ -249,7 +249,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     </div>
 
                     {/* Status Container */}
-                    <div className={`flex-[50%] text-[0.9rem] flex items-center justify-end ${isChangeMade ? "text-red-300" : "text-green-300"}`}>
+                    <div className={`flex-[50%] text-[0.9rem] flex items-center justify-end ${isChangeMade ? "text-red-600 dark:text-red-300" : "text-green-600 dark:text-green-300"}`}>
                         {statusText}
                     </div>
 
@@ -265,21 +265,21 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30 border-y border-slate-600">
+                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30 border-y border-slate-300 dark:border-slate-600">
 
                     {/* Questions List Container */}
                     <div className="w-[60vw] flex items-center justify-center p-3">
 
-                        <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-white font-bold text-xl">
+                        <div className="min-h-full h-max w-full flex flex-col items-center justify-start gap-6 text-black dark:text-white font-bold text-xl">
                             {tempQuestionBanksData[questionBankName].map((question, index) => (
                             // <div key={index} className="w-full h-28 flex items-center justify-center bg-white rounded-3xl overflow-hidden bg-opacity-10 border-2 border-opacity-[4%] border-white">
                             //     {question.Question}
                             // </div>
 
-                            <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-base-200 border">
+                            <div key={index} tabIndex="0" className="collapse collapse-arrow border-base-300 bg-slate-300 dark:bg-slate-300 bg-opacity-30 dark:bg-opacity-10 border border-opacity-[15%] dark:border-opacity-[4%] shadow-md">
                                 <input type="checkbox" />
                                 <div className="collapse-title">
-                                    <div className="text-sm text-violet-400">
+                                    <div className="text-sm text-violet-600 dark:text-violet-400">
                                         {question.Type}
                                     </div>
                                     <div className="text-xl font-medium">
@@ -299,15 +299,15 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
 
                 {/* Start Now Button Container */}
-                <div className="h-[10%] max-h[10%] w-full flex flex-row items-center justify-end pr-3 gap-6">
+                <div className="h-[10%] max-h[10%] w-full flex flex-row items-center justify-end pr-3 gap-6 text-black dark:text-white">
 
                     {/* Save Button */}
-                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => saveButtonClicked()}>
+                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" onClick={() => saveButtonClicked()}>
                         Save
                     </div>
 
                     {/* Start Button */}
-                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-teal-500 transition">
+                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
                         <Link to="/" className="w-full h-full flex items-center justify-center">
                             Start
                         </Link>
