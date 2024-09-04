@@ -2,7 +2,7 @@
   "Philo": [
     {
       "Question": "What is the meaning of life?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "It depends."
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "Question": "What is the best way to live a good life?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "By following virtues and seeking happiness."
     },
     {
@@ -27,14 +27,14 @@
     },
     {
       "Question": "What is the role of reason in human life?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "Reason helps us make sense of the world and make informed decisions."
     }
   ],
   "CS": [
     {
       "Question": "What is the time complexity of binary search?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "0(log n)"
     },
     {
@@ -44,12 +44,12 @@
     },
     {
       "Question": "What is a primary key in a database?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "A unique identifier for each row in a table"
     },
     {
       "Question": "What does SQL stand for?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "Structured Query Language"
     },
     {
@@ -59,7 +59,7 @@
     },
     {
       "Question": "What is the main purpose of an index in a database?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "To improve the speed of data retrieval operations"
     },
     {
@@ -69,7 +69,7 @@
     },
     {
       "Question": "What is the time complexity of accessing an element in an array?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "O(1)"
     },
     {
@@ -79,14 +79,14 @@
     },
     {
       "Question": "What is the purpose of a foreign key in a database?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "To establish a link between the data in two tables"
     }
   ],
   "Database": [
     {
       "Question": "What is a primary key?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "A unique identifier for each row in a table"
     },
     {
@@ -96,17 +96,17 @@
     },
     {
       "Question": "What is a foreign key?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "A field in one table that uniquely identifies a row of another table"
     },
     {
       "Question": "Which SQL statement is used to retrieve data from a database?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "SELECT"
     },
     {
       "Question": "What is the purpose of the JOIN clause in SQL?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "To combine rows from two or more tables based on a related column"
     },
     {
@@ -116,24 +116,24 @@
     },
     {
       "Question": "What is the command to create a new table in SQL?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "CREATE TABLE"
     },
     {
       "Question": "Which SQL keyword is used to sort the result-set?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "ORDER BY"
     },
     {
       "Question": "What is the command to delete a table in SQL?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "DROP TABLE"
     }
   ],
   "AWS": [
     {
       "Question": "AWS?",
-      "Type": "Enumeration",
+      "Type": "Identification",
       "Answer": "gege"
     },
     {
