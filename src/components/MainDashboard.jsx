@@ -71,7 +71,7 @@ function MainDashboard() {
         </div>
 
         {/* Profile */}
-        <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-right-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
+        <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-left-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
           <Link to="/question_banks" className="w-full h-full flex items-center justify-center gap-6">
             
             <div>
@@ -86,7 +86,7 @@ function MainDashboard() {
         </div>
 
         {/* Guide */}
-        <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-right-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
+        <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-left-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
           <Link to="/question_banks" className="w-full h-full flex items-center justify-center gap-6">
             
             <div>

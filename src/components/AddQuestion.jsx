@@ -265,7 +265,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 </div>
 
                 {/* Preview Container */}
-                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30 border-y border-slate-300 dark:border-slate-600">
+                <div className="h-[75%] w-full flex items-start justify-center overflow-y-auto z-30">
 
                     {/* Questions List Container */}
                     <div className="w-[60vw] flex items-center justify-center p-3">
