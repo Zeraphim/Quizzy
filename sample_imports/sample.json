@@ -1,0 +1,17 @@
+[
+    {
+        "Question": "Windows or MacOS?",
+        "Type": "Identification",
+        "Answer": "MacOS"
+    },
+    {
+        "Question": "Theo or Primagen?",
+        "Type": "Identification",
+        "Answer": "Skip"
+    },
+    {
+        "Question": "Hotel?",
+        "Type": "Identification",
+        "Answer": "Trivago"
+    }
+]

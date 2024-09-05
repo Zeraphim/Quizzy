@@ -154,6 +154,35 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
     }
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const fileContent = e.target.result;
+                try {
+                    if (file.type === 'application/json') {
+                        const jsonData = JSON.parse(fileContent);
+                        const formattedContent = jsonData.map(item => 
+                            `Question: ${item.Question}\nType: ${item.Type}\nAnswer: ${item.Answer}`
+                        ).join('\n\n');
+                        setTextAreaContent(prevContent => prevContent + "\n" + formattedContent);
+                        toast.success("JSON file content appended successfully!");
+                    } else {
+                        setTextAreaContent(prevContent => prevContent + fileContent);
+                        toast.success("File content appended successfully!");
+                    }
+                } catch (error) {
+                    toast.error("Failed to read file content.");
+                }
+            };
+            reader.onerror = () => {
+                toast.error("Failed to read file content.");
+            };
+            reader.readAsText(file);
+        }
+    };
+
 
 
     return (
@@ -194,7 +223,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     </div> */}
 
                     {/* File Upload */}
-                    <input type="file" className="file-input file-input-accent w-full h-20 max-w-xs  text-black dark:text-white font-bold text-xl bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" />
+                    <input type="file" className="file-input file-input-accent w-full h-20 max-w-xs  text-black dark:text-white font-bold text-xl bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white" onChange={handleFileChange}/>
 
                     {/* <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-800 hover:bg-violet-800 transition" onClick={() => testButtonClicked()}>
                         Test
@@ -313,7 +342,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                     </div>
 
                     {/* Study Now Button */}
-                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
+                    <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-teal-500 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
                         <Link to={`/question_banks/study`} className="w-full h-full flex items-center justify-center">
                             Study Now
                         </Link>
