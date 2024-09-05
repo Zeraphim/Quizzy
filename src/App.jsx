@@ -50,7 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}>
             <Route index element={<Main firstQuestionBank={firstQuestionBank}/>} />
-            <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank}/>} />
+            <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} setQuestionBanksData={setQuestionBanksData}/>} />
             <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData}/>} />
             <Route path="question_banks/study" element={<StudyQuestionBank QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} answeredQuestionBanks={answeredQuestionBanks} setAnsweredQuestionBanks={setAnsweredQuestionBanks} />} />
 
