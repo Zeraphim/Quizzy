@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 
 // Toastify Stylings
 import 'react-toastify/dist/ReactToastify.css';
+import Guide from "./components/Guide";
 
 function App() {
   const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
@@ -40,7 +41,7 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    console.log(darkMode)
+    // console.log(darkMode)
   };
 
 
@@ -53,6 +54,7 @@ function App() {
             <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} setQuestionBanksData={setQuestionBanksData}/>} />
             <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData}/>} />
             <Route path="question_banks/study" element={<StudyQuestionBank QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} answeredQuestionBanks={answeredQuestionBanks} setAnsweredQuestionBanks={setAnsweredQuestionBanks} />} />
+            <Route path="guide" element={<Guide />} />
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >
             <Route index element={<Admin />} />
