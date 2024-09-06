@@ -143,17 +143,17 @@ function QuestionBanks({QuestionBanksData, firstQuestionBank, setQuestionBanksDa
             {/* Action Buttons Container */}
             <div className="h-full w-[20vw] text-black dark:text-white font-bold text-xl flex flex-col items-center justify-center px-6 gap-6 animate-fade-left-1s transition">
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
-                    <Link to="/" className="w-full h-full flex items-center justify-center">
+                    <Link to="/user" className="w-full h-full flex items-center justify-center">
                         Back
                     </Link>
                 </div>
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white ">
-                    <Link to={`/question_banks/${chosenQuestionBank}/add_question`} className="w-full h-full flex items-center justify-center">
+                    <Link to={`/user/question_banks/${chosenQuestionBank}/add_question`} className="w-full h-full flex items-center justify-center">
                         Add Questions
                     </Link>
                 </div>
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white ">
-                    <Link to={`/question_banks/study`} className="w-full h-full flex items-center justify-center">
+                    <Link to={`/user/question_banks/study`} className="w-full h-full flex items-center justify-center">
                         Study Now
                     </Link>
                 </div>

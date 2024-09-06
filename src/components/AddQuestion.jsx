@@ -196,7 +196,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                 {/* Back and Upload Button Container */}
                 <div className="flex-[15%] h-[15%] w-full flex flex-row items-center justify-start gap-6 animate-fade-down-1s transition">
                     <div className="w-1/4 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
-                        <Link to="/" className="w-full h-full flex items-center justify-center">
+                        <Link to="/user" className="w-full h-full flex items-center justify-center">
                             Back
                         </Link>
                     </div>
@@ -209,7 +209,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
                         <ul tabIndex={0} className="dropdown-content menu text-black dark:text-white bg-slate-300 dark:bg-slate-800 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white rounded-box z-[1] w-52 p-2 shadow">
                             {Object.keys(QuestionBanksData).map((quesBankTitle) => (
                                 <li key={quesBankTitle}>
-                                    <Link to={`/question_banks/${quesBankTitle}/add_question`} className="w-full h-full dark-hover:bg-slate-400">
+                                    <Link to={`/user/question_banks/${quesBankTitle}/add_question`} className="w-full h-full dark-hover:bg-slate-400">
                                         <a className={``}>{quesBankTitle}</a>
                                     </Link>
                                 </li>
@@ -343,7 +343,7 @@ function AddQuestion({QuestionBanksData, setQuestionBanksData}) {
 
                     {/* Study Now Button */}
                     <div className="w-1/4 h-2/3 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-teal-500 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
-                        <Link to={`/question_banks/study`} className="w-full h-full flex items-center justify-center">
+                        <Link to={`/user/question_banks/study`} className="w-full h-full flex items-center justify-center">
                             Study Now
                         </Link>
                     </div>

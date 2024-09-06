@@ -20,6 +20,9 @@ import { useEffect, useState } from "react";
 // Toastify Stylings
 import 'react-toastify/dist/ReactToastify.css';
 import Guide from "./components/Guide";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import UserLayout from "./layouts/UserLayout";
 
 function App() {
   const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
@@ -44,24 +47,33 @@ function App() {
     // console.log(darkMode)
   };
 
+  const [userEmail, setUserEmail] = useState(null);
+
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainLayout toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}>
-            <Route index element={<Main firstQuestionBank={firstQuestionBank}/>} />
-            <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} setQuestionBanksData={setQuestionBanksData}/>} />
-            <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData}/>} />
-            <Route path="question_banks/study" element={<StudyQuestionBank QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} answeredQuestionBanks={answeredQuestionBanks} setAnsweredQuestionBanks={setAnsweredQuestionBanks} />} />
-            <Route path="guide" element={<Guide />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Login setUserEmail={setUserEmail}/>} />
+            <Route path="log_in" element={<Login setUserEmail={setUserEmail}/>} />
+            <Route path="sign_up" element={<SignUp setUserEmail={setUserEmail}/>} />
+
+            {/* User Route */}
+            <Route path="user" element={<UserLayout toggleDarkMode={toggleDarkMode} darkMode={darkMode} userEmail={userEmail} />}>
+              <Route index element={<Main firstQuestionBank={firstQuestionBank} />} />
+              <Route path="question_banks" element={<QuestionBanks QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} setQuestionBanksData={setQuestionBanksData} />} />
+              <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData} />} />
+              <Route path="question_banks/study" element={<StudyQuestionBank QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} answeredQuestionBanks={answeredQuestionBanks} setAnsweredQuestionBanks={setAnsweredQuestionBanks} />} />
+              <Route path="guide" element={<Guide />} />
+            </Route>
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >
-            <Route index element={<Admin />} />
-                <Route path="admin" element={<Admin />} />
-                <Route path="users" element={<Users />} />
-                <Route path="others" element={<Others />} />
-                <Route path="Profile" element={<Profile />} />
+              <Route index element={<Admin />} />
+              <Route path="admin" element={<Admin />} />
+              <Route path="users" element={<Users />} />
+              <Route path="others" element={<Others />} />
+              <Route path="Profile" element={<Profile />} />
             </Route> */}
 
             <Route path="*" element={<ErrorPage />} />

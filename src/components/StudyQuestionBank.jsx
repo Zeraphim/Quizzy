@@ -123,7 +123,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
 
 
     return (
-        <div className="h-screen max-h-full w-screen flex flex-row items-center justify-center p-9 gap-6">
+        <div className="h-screen max-h-full w-screen flex flex-row items-center justify-center p-9 gap-6 overflow-hidden">
 
             {/* Question Banks List Cover */}
             {isAnswering && (
@@ -323,7 +323,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                 </div>
 
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
-                    <Link to="/" className="w-full h-full flex items-center justify-center">
+                    <Link to="/user" className="w-full h-full flex items-center justify-center">
                         Back
                     </Link>
                 </div>
@@ -335,12 +335,12 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu text-black dark:text-white bg-slate-300 dark:bg-slate-800 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white rounded-box z-[1] w-52 p-2 shadow">
                         <li>
-                            <Link to={`/question_banks/study`} className="w-full h-full dark-hover:bg-slate-400">
+                            <Link to={`/user/question_banks/study`} className="w-full h-full dark-hover:bg-slate-400">
                                 <a className={``}>Question Bank</a>
                             </Link>
                         </li>
                         <li>
-                            <Link to={`/math_banks/study`} className="w-full h-full dark-hover:bg-slate-400">
+                            <Link to={`/user/math_banks/study`} className="w-full h-full dark-hover:bg-slate-400">
                                 <a className={``}>Math Bank</a>
                             </Link>
                         </li>
@@ -348,7 +348,7 @@ function StudyQuestionBank({QuestionBanksData, firstQuestionBank, answeredQuesti
                 </div>
 
                 <div className="w-full h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white ">
-                    <Link to={`/question_banks/${chosenQuestionBank}/study`} className="w-full h-full flex items-center justify-center">
+                    <Link to={`/user/question_banks/${chosenQuestionBank}/study`} className="w-full h-full flex items-center justify-center">
                         Save
                     </Link>
                 </div>

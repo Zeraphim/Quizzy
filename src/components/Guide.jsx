@@ -12,7 +12,7 @@ function Guide() {
 
             {/* Back Button */}
             <div className="w-2/4 h-20 rounded-lg flex items-center justify-center bg-slate-300 dark:bg-white hover:bg-violet-800 bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white transition shadow-md hover:text-white">
-                <Link to="/" className="w-full h-full flex items-center justify-center">
+                <Link to="/user" className="w-full h-full flex items-center justify-center">
                     Back
                 </Link>
             </div>

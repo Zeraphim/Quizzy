@@ -7,7 +7,7 @@ import quizzy_logo from "../assets/logo1-transparent.webp"
 
 import PropTypes from 'prop-types';
 
-function MainDashboard({firstQuestionBank}) {
+function MainDashboard({firstQuestionBank, isLoggedIn}) {
   return (
     <div className="h-screen w-screen bg-slate-200 dark:bg-slate-900 text-black dark:text-white text-4xl font-bold flex items-center justify-center select-none transition">
 
@@ -28,7 +28,7 @@ function MainDashboard({firstQuestionBank}) {
       <div className="grid grid-rows-4 grid-flow-col gap-4">
         {/* Question Banks */}
         <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-right-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
-          <Link to="/question_banks" className="w-full h-full flex items-center justify-center gap-6">
+          <Link to="/user/question_banks" className="w-full h-full flex items-center justify-center gap-6">
             
             <div>
                 <FontAwesomeIcon icon={faBook}  className="h-10 text-slate-900 dark:text-white group-hover:text-white group-hover:scale-110 transition transform"/>
@@ -42,7 +42,7 @@ function MainDashboard({firstQuestionBank}) {
         </div>
         {/* Add Question */}
         <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-right-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
-          <Link to={`/question_banks/${firstQuestionBank}/add_question`} className="w-full h-full flex items-center justify-center gap-6">
+          <Link to={`/user/question_banks/${firstQuestionBank}/add_question`} className="w-full h-full flex items-center justify-center gap-6">
             
             <div>
                 <FontAwesomeIcon icon={faInfinity}  className="h-10 text-slate-900 dark:text-white group-hover:text-white group-hover:scale-110 transition transform"/>
@@ -58,7 +58,7 @@ function MainDashboard({firstQuestionBank}) {
         {/* Start now */}
         <div className="row-span-4 flex items-center justify-center w-[20vw] bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-up-1s transition group hover:bg-teal-500 hover:scale-[102%] shadow-xl">
           
-          <Link to={`/question_banks/study`} className="w-full h-full flex flex-col items-center justify-center gap-6">
+          <Link to={`/user/question_banks/study`} className="w-full h-full flex flex-col items-center justify-center gap-6">
             
             <div>
                 <FontAwesomeIcon icon={faPlay}  className="h-10 text-slate-900 dark:text-white group-hover:text-white group-hover:scale-110 group-hover:-translate-y-3 transition transform"/>
@@ -74,7 +74,7 @@ function MainDashboard({firstQuestionBank}) {
 
         {/* Profile */}
         <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-left-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
-          <Link to="/question_banks" className="w-full h-full flex items-center justify-center gap-6">
+          <Link to="/user/question_banks" className="w-full h-full flex items-center justify-center gap-6">
             
             <div>
                 <FontAwesomeIcon icon={faUser}  className="h-10 text-slate-900 dark:text-white group-hover:text-white group-hover:scale-110 transition transform"/>
@@ -89,7 +89,7 @@ function MainDashboard({firstQuestionBank}) {
 
         {/* Guide */}
         <div className="col-span-2 row-span-2 flex items-center justify-center w-[35vw] h-[40vh] backdrop-blur-sm gap-6 bg-slate-300 dark:bg-white rounded-3xl overflow-hidden bg-opacity-30 dark:bg-opacity-10 border-2 border-opacity-[15%] dark:border-opacity-[4%] border-slate-900 dark:border-white z-40 animate-fade-left-1s transition group hover:bg-violet-800 hover:scale-[102%] shadow-xl">
-          <Link to="/guide" className="w-full h-full flex items-center justify-center gap-6">
+          <Link to="/user/guide" className="w-full h-full flex items-center justify-center gap-6">
             
             <div>
                 <FontAwesomeIcon icon={faMap}  className="h-10 text-slate-900 dark:text-white group-hover:text-white group-hover:scale-110 transition transform"/>
@@ -108,7 +108,8 @@ function MainDashboard({firstQuestionBank}) {
 }
 
 MainDashboard.propTypes = {
-    firstQuestionBank: PropTypes.string.isRequired
+    firstQuestionBank: PropTypes.string.isRequired,
+    isLoggedIn: PropTypes.string.isRequired
 }
 
 export default MainDashboard
