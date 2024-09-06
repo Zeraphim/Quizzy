@@ -23,6 +23,10 @@ import Guide from "./components/Guide";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import UserLayout from "./layouts/UserLayout";
+import Profile from "./components/Profile";
+
+// Firebase Imports
+import { getSpecificUserData } from "./firebase/firebase_config";
 
 function App() {
   const [questionBanksData, setQuestionBanksData] = useState(question_banks_data);
@@ -48,7 +52,16 @@ function App() {
   };
 
   const [userEmail, setUserEmail] = useState(null);
+  const [userData, setUserData] = useState(null);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const data = await getSpecificUserData(userEmail);
+      setUserData(data);
+    };
+
+    fetchUserData();
+  }, [userEmail]);
 
   return (
     <>
@@ -66,6 +79,7 @@ function App() {
               <Route path="question_banks/:questionBankName/add_question" element={<AddQuestion QuestionBanksData={questionBanksData} setQuestionBanksData={setQuestionBanksData} />} />
               <Route path="question_banks/study" element={<StudyQuestionBank QuestionBanksData={questionBanksData} firstQuestionBank={firstQuestionBank} answeredQuestionBanks={answeredQuestionBanks} setAnsweredQuestionBanks={setAnsweredQuestionBanks} />} />
               <Route path="guide" element={<Guide />} />
+              <Route path="profile" element={<Profile userData={userData}/>} />
             </Route>
 
             {/* <Route path="dashboard" element={<DashboardTemplate />} >
