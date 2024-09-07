@@ -70,7 +70,20 @@ function Guide() {
             </div>
 
             {/* Adding Questions Section */}
-            <div>
+            {/* <div>
+                <h1 className="text-3xl font-bold text-violet-600 dark:text-violet-500 pb-4">Adding Questions</h1>
+                <p className=" text-xl font-md">
+                    Adding questions in a Question Bank entails entering a certain format for the question, its type, and the answer.
+                    <br></br>
+                    <br></br>
+                    Here's an example on how to make a question.
+                    <br></br><br></br>
+                    <b className="font-bold">Question:</b> Your question<br></br>
+                    <b className="font-bold">Type:</b> True/False, Multiple Choice, or Identification<br></br>
+                    <b className="font-bold">Answer:</b> The correct answer
+                </p>
+            </div> */}
+            <div className="w-full h-auto items-start justify-start">
                 <h1 className="text-3xl font-bold text-violet-600 dark:text-violet-500 pb-4">Adding Questions</h1>
                 <p className=" text-xl font-md">
                     Adding questions in a Question Bank entails entering a certain format for the question, its type, and the answer.
