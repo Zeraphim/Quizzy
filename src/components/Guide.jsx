@@ -1,9 +1,6 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
 
 function Guide() {
-
-  const [toggle, setToggle] = useState("all");
 
   return (
     <div className="h-screen w-screen flex flex-row items-center justify-center p-20">
